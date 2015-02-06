@@ -26,38 +26,52 @@
     - Open the `ssl_certs` directory, and copy the previously-downloaded `*.pem` file into this directory.
     - Close and re-open a console window.
 
-4. Install required gems.
+4. Install required gem.
   - Run:
 
-    ```
-      gem install activesupport --no-ri --no-rdoc
-      gem install 'tzinfo-data' --no-ri --no-rdoc
-    ```
-5. Download TASCI merger package zipfile from [Github](https://github.com/pmanko/tasci_merger) using the *Download ZIP* button.
-
-10. Merge TASCI files.
-6. Unpack to *package_directory*.
-
-7. Run **IRB** in *package_directory*.
-  - Open console
-  - Run `cd unpacked_package_directory` to navigate to package directory
-  - Run `irb` to open interactive ruby console
-
-8. Load package.
-        
-  ```ruby
-    load('./tasci_merger.rb')
   ```
-9. Generate master file list.
-
-  ```ruby
-    tasci_merger = ETL::TasciMerger.new
-    tasci_merger.create_master_list("TASCI_FILE_DIRECTORY", "OUTPUT_DIRECTORY")
+    gem install tasci_merger
   ```
 
-  ```ruby
-    tm.merge_files(['SUBJECT_CODE'], "MASTER_FILE_PATH", "OUTPUT_DIRECTORY", "TASCI_FILE_DIRECTORY")
-  ```
-    
-             
+## Usage in IRB
 
+1. Open console and run `irb` to open interactive ruby console.
+
+2. Run `require 'tasci_merger'`
+
+3. Create tasci merger object:
+
+  ```ruby
+    tm = TasciMerger.new("SUBJECT_CODE", "TASCI_DIRECTORY", "OUTPUT_DIRECTORY")
+  ```
+
+4. Create master file:
+
+  ```ruby
+    tm.create_master_list
+  ```
+
+5. Create merged file:
+
+  ```ruby
+    tm.merge_files
+  ```
+
+## Command-line Usage
+
+The ruby gem makes the `tasci_merger` command available.
+
+The command takes the following parameters:
+- SUBJECT_CODE
+- TASCI_DIRECTORY
+- OUTPUT_DIRECTORY
+
+The command creates a master file and merged file in the output directory.
+
+**Example Usage:**
+
+```
+  tasci_merger 3441GX X:/TasciFilesFor3441GX C:/Circadian
+```
+
+This command would create the 2 files in the `C:/Circadian` directory.
