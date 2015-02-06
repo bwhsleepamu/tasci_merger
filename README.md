@@ -16,20 +16,20 @@
 
 6. Load package.
         
-        ```{Ruby}
-            load('./tasci_merger.rb')
-        ```
+  ```ruby
+    load('./tasci_merger.rb')
+  ```
 7. Generate master file list.
 
-        ```{Ruby}
-            tasci_merger = ETL::TasciMerger.new
-            tm.create_master_list("TASCI_FILE_DIRECTORY", "OUTPUT_DIRECTORY")
-        ```
+  ```ruby
+    tasci_merger = ETL::TasciMerger.new
+    tm.create_master_list("TASCI_FILE_DIRECTORY", "OUTPUT_DIRECTORY")
+  ```
 8. Merge TASCI files.
 
-        ```{Ruby}
-            tm.merge_files(['SUBJECT_CODE'], "MASTER_FILE_PATH", "OUTPUT_DIRECTORY", "TASCI_FILE_DIRECTORY")
-        ```
+  ```ruby
+    tm.merge_files(['SUBJECT_CODE'], "MASTER_FILE_PATH", "OUTPUT_DIRECTORY", "TASCI_FILE_DIRECTORY")
+  ```
     
              
 
