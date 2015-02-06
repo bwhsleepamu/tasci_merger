@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'tasci_merger'
+
+# SUBJECT_CODE, TASCI_DIR
+tm = TasciMerger.new(ARGV[0], ARGV[1], ARGV[2])
+tm.create_master_list
+tm.merge_files

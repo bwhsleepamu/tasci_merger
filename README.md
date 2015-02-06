@@ -31,12 +31,17 @@
 
     ```
       gem install activesupport --no-ri --no-rdoc
+      gem install 'tzinfo-data' --no-ri --no-rdoc
     ```
 5. Download TASCI merger package zipfile from [Github](https://github.com/pmanko/tasci_merger) using the *Download ZIP* button.
 
+10. Merge TASCI files.
 6. Unpack to *package_directory*.
 
 7. Run **IRB** in *package_directory*.
+  - Open console
+  - Run `cd unpacked_package_directory` to navigate to package directory
+  - Run `irb` to open interactive ruby console
 
 8. Load package.
         
@@ -47,9 +52,8 @@
 
   ```ruby
     tasci_merger = ETL::TasciMerger.new
-    tm.create_master_list("TASCI_FILE_DIRECTORY", "OUTPUT_DIRECTORY")
+    tasci_merger.create_master_list("TASCI_FILE_DIRECTORY", "OUTPUT_DIRECTORY")
   ```
-10. Merge TASCI files.
 
   ```ruby
     tm.merge_files(['SUBJECT_CODE'], "MASTER_FILE_PATH", "OUTPUT_DIRECTORY", "TASCI_FILE_DIRECTORY")
