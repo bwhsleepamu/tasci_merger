@@ -71,7 +71,7 @@ The command creates a master file and merged file in the output directory.
 **Example Usage:**
 
 ```
-  tasci_merger 3441GX X:/TasciFilesFor3441GX C:/Circadian
+  merge_tasci 3441GX X:/TasciFilesFor3441GX C:/Circadian
 ```
 
 This command would create the 2 files in the `C:/Circadian` directory.
