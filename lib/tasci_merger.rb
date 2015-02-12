@@ -122,6 +122,9 @@ class TasciMerger
     merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
     merged_file << %w(SUBJECT_CODE FILE_NAME_SLEEP_WAKE_EPISODE LABTIME SLEEP_STAGE LIGHTS_OFF_ON_FLAG SEM_FLAG)
 
+    simple_merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_simple_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
+    simple_merged_file << %w(SLEEP_STAGE LABTIME)
+
     previous_first_labtime = nil
     previous_last_labtime = nil
 
@@ -246,16 +249,60 @@ class TasciMerger
         # 0      No Slow Eye Movement
         sem_event = (fields[7] =~ /SEM/ ? 1 : 0)
 
-        # Previous Effort:
-        #line_time = Time.zone.local(file_info[:record_full_time].year, file_info[:record_full_time].month, file_info[:record_full_time].day, fields[4].to_i, fields[5].to_i, fields[6].to_i)
-        #line_labtime = Labtime.parse(line_time)
+
+
+
+        # Alternate Coding:
+        # 0 - UNDEF
+        # 1 - N1
+        # 2 - N2
+        # 3 - N3
+        # 4 - 4
+        # 5 - Wake
+        # 6 - REM
+        # 7 - MT
+        # 8 - Sleep Onset (LIGHTS OFF)
+        # 9 - Lights On
+
+        ### SLEEP STAGE, LABTIME
+        simple_line_event = nil
+        if fields[8] == "Wake"
+          simple_line_event = 5
+        elsif fields[8] == "Undefined"
+          simple_line_event = 0
+        elsif fields[8] == "N1"
+          simple_line_event = 1
+        elsif fields[8] == "N2"
+          simple_line_event = 2
+        elsif fields[8] == "N3"
+          simple_line_event = 3
+        elsif fields[8] == "4"
+          simple_line_event = 4
+        elsif fields[8] == "REM"
+          simple_line_event = 6
+        elsif fields[8] == "MVT"
+          simple_line_event = 7
+        else
+          raise StandardError, "Cannot map the following event: #{fields[8]}"
+        end
+
+        if sleep_period == 1
+          simple_line_event = 8
+        elsif sleep_period == 2
+          simple_line_event = 9
+        end
+
+
+
+
 
         first_labtime = line_labtime if first_labtime.nil?
         last_labtime = line_labtime
 
         output_line = [@subject_code.upcase, file_info[:sleep_wake_episode], line_labtime.to_decimal, line_event, sleep_period, sem_event]
+        simple_output_line = [simple_line_event, line_labtime.to_decimal]
         merged_file << output_line
-
+        simple_merged_file << simple_output_line
 
         #MY_LOG.info fields
       end
@@ -270,6 +317,7 @@ class TasciMerger
       previous_last_labtime = last_labtime
     end
     merged_file.close
+    simple_merged_file.close
   end
 
 end

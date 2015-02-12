@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'tasci_merger'
-  s.version     = '0.0.1'
+  s.version     = '0.1.0'
   s.date        = '2015-02-06'
   s.summary     = "Merger utility for TASCI scored sleep files."
   s.description = "Merger utility for TASCI scored sleep files, built for the Division of Sleep and Circadian Disorders at BWH."
@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.1.0'
 
   s.add_dependency "activesupport", '~> 4.2', '>= 4.2.0'
-  s.add_dependency "tzinfo-data"
+  s.add_dependency "tzinfo-data", '~> 1'
 end
 
