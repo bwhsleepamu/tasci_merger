@@ -51,7 +51,7 @@
     tm.create_master_list
   ```
 
-5. Create merged file:
+5. Create 2 merged files:
 
   ```ruby
     tm.merge_files
@@ -66,7 +66,7 @@ The command takes the following parameters:
 - TASCI_DIRECTORY
 - OUTPUT_DIRECTORY
 
-The command creates a master file and merged file in the output directory.
+The command creates a master file and two merged files in the output directory.
 
 **Example Usage:**
 
