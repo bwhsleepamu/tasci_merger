@@ -103,6 +103,7 @@ class TasciMerger
         last_labtime = line_labtime
 
         #MY_LOG.info fields
+        #puts fields
       end
 
       master_file_contents << [file, file_info[:record_labtime].to_short_s, file_info[:record_full_time], file_info[:epochs], first_labtime.to_decimal, last_labtime.to_decimal]
@@ -114,6 +115,7 @@ class TasciMerger
     puts "Created master file: #{master_file.path}"
     @master_file_path = master_file.path
     master_file_name
+    master_file.close 
   end
 
   def merge_files
