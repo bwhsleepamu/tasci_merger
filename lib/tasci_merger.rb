@@ -1,6 +1,6 @@
 require 'csv'
-require 'man_merger'
-require 'labtime'
+require './man_merger'
+require './labtime'
 
 Time.zone = 'Eastern Time (US & Canada)'
 
@@ -24,7 +24,7 @@ class TasciMerger
     puts File.exists?(@tasci_directory)
 
     Dir.foreach(@tasci_directory) do |file|
-      next if file == '.' or file == '..'
+      next if file == '.' or file == '..' or File.extname(file).upcase != ".TASCI"
 
       puts file
 
