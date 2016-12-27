@@ -6,3 +6,5 @@ require 'tasci_merger'
 tm = TasciMerger.new(ARGV[0], ARGV[1], ARGV[2])
 tm.create_master_list
 tm.merge_files
+
+# tm = TasciMerger.new("3241gx63", "C:/Partners/Tasci/Scored", "C:/Partners/Tasci/Output")

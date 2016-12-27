@@ -1,6 +1,6 @@
 require 'csv'
-require './man_merger'
-require './labtime'
+require_relative 'man_merger'
+require_relative 'labtime'
 
 Time.zone = 'Eastern Time (US & Canada)'
 
@@ -13,7 +13,14 @@ class TasciMerger
     @master_file_path
   end
 
+  def version
+    '0.0.1'
+  end
+
+
   def create_master_list
+    puts "New Version"
+
     master_file_name = File.join(@output_directory, "tasci_master_#{Time.zone.now.strftime("%Y%m%d")}.csv")
     master_file = CSV.open(master_file_name, "wb")
 
@@ -112,7 +119,7 @@ class TasciMerger
     master_file_contents.sort! {|x, y| x[4] <=> y[4] }
     master_file_contents.each { |row| master_file << row }
 
-    puts "Created master file: #{master_file.path}"
+    puts "1. Created master file: #{master_file.path}"
     @master_file_path = master_file.path
     master_file_name
     master_file.close 
@@ -208,9 +215,9 @@ class TasciMerger
         # Sleep Period Coding:
         # 1      Sleep Onset (Lights Off)
         # 2      Sleep Offset (Lights On)
-        if /Lights Off/i.match(fields[7]) # Sleep Onset
+        if /Lights Off|LOff|LightsOn/i.match(fields[7]) # Sleep Onset
           sleep_period = 1
-        elsif /Lights On/i.match(fields[7]) # Sleep Offset
+        elsif /Lights On|LOn|LightsOn/i.match(fields[7]) # Sleep Offset
           sleep_period = 2
         else
           sleep_period = nil
