@@ -7,4 +7,4 @@ tm = TasciMerger.new(ARGV[0], ARGV[1], ARGV[2])
 tm.create_master_list
 tm.merge_files
 
-# tm = TasciMerger.new("3241gx63", "C:/Partners/Tasci/Scored", "C:/Partners/Tasci/Output")
+m = TasciMerger.new("3232GX", "/T/IPM/CSR_32d_FD_20h/3232GX/PSG/Scored/TASCI", "/home/pwm4/Desktop/")

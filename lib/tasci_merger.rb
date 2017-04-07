@@ -233,17 +233,17 @@ class TasciMerger
         # 5      REM
         # 9      Wake
         line_event = nil
-        if fields[8] == "Wake"
+        if fields[8] == "Wake" || fields[8] == 'Awake'
           line_event = 9
         elsif fields[8] == "Undefined"
           line_event = 7
-        elsif fields[8] == "N1"
+        elsif fields[8] == "N1" ||  fields[8] == '1'
           line_event = 1
-        elsif fields[8] == "N2"
+        elsif fields[8] == "N2" ||  fields[8] == '2'
           line_event = 2
-        elsif fields[8] == "N3"
+        elsif fields[8] == "N3" ||  fields[8] == '3'
           line_event = 3
-        elsif fields[8] == "4"
+        elsif fields[8] == "N4" || fields[8] == '4'
           line_event = 4
         elsif fields[8] == "REM"
           line_event = 5
@@ -275,17 +275,17 @@ class TasciMerger
 
         ### SLEEP STAGE, LABTIME
         simple_line_event = nil
-        if fields[8] == "Wake"
+        if fields[8] == "Wake" || fields[8] == 'Awake'
           simple_line_event = 5
         elsif fields[8] == "Undefined"
           simple_line_event = 0
-        elsif fields[8] == "N1"
+        elsif fields[8] == "N1" || fields[8] == '1'
           simple_line_event = 1
-        elsif fields[8] == "N2"
+        elsif fields[8] == "N2" || fields[8] == '2'
           simple_line_event = 2
-        elsif fields[8] == "N3"
+        elsif fields[8] == "N3" || fields[8] == '3'
           simple_line_event = 3
-        elsif fields[8] == "4"
+        elsif fields[8] == "N4" || fields[8] == '4'
           simple_line_event = 4
         elsif fields[8] == "REM"
           simple_line_event = 6
