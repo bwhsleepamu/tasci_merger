@@ -134,6 +134,9 @@ class TasciMerger
     simple_merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_simple_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
     simple_merged_file << %w(SLEEP_STAGE LABTIME)
 
+    sem_merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_sem_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
+    simple_merged_file << %w(SUBJECT_CODE LABTIME)
+
     previous_first_labtime = nil
     previous_last_labtime = nil
 
@@ -310,8 +313,11 @@ class TasciMerger
 
         output_line = [@subject_code.upcase, file_info[:sleep_wake_episode], line_labtime.to_decimal, line_event, sleep_period, sem_event]
         simple_output_line = [simple_line_event, line_labtime.to_decimal]
+        sem_output_line = [@subject_code.upcase, line_labtime.to_decimal] if sem_event == 1
+
         merged_file << output_line
         simple_merged_file << simple_output_line
+        sem_merged_file << sem_output_line if sem_event == 1
 
         #MY_LOG.info fields
       end
@@ -327,6 +333,7 @@ class TasciMerger
     end
     merged_file.close
     simple_merged_file.close
+    sem_merged_file.close
   end
 
 end

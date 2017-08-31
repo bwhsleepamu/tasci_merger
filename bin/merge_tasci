@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require 'tasci_merger'
 
 # SUBJECT_CODE, TASCI_DIR

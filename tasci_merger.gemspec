@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'tasci_merger'
-  s.version     = '0.2.0'
+  s.version     = '0.2.2'
   s.date        = '2017-03-26'
   s.summary     = "Merger utility for TASCI scored sleep files."
   s.description = "Merger utility for TASCI scored sleep files, built for the Division of Sleep and Circadian Disorders at BWH."
