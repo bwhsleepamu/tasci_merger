@@ -303,11 +303,7 @@ class TasciMerger
         elsif sleep_period == 2
           simple_line_event = 9
         end
-
-
-
-
-
+        
         first_labtime = line_labtime if first_labtime.nil?
         last_labtime = line_labtime
 
