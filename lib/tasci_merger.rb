@@ -134,6 +134,9 @@ class TasciMerger
     simple_merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_simple_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
     simple_merged_file << %w(SLEEP_STAGE LABTIME)
 
+    sem_merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_sem_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
+    simple_merged_file << %w(SUBJECT_CODE LABTIME)
+
     previous_first_labtime = nil
     previous_last_labtime = nil
 
@@ -233,17 +236,17 @@ class TasciMerger
         # 5      REM
         # 9      Wake
         line_event = nil
-        if fields[8] == "Wake"
+        if fields[8] == "Wake" || fields[8] == 'Awake'
           line_event = 9
         elsif fields[8] == "Undefined"
           line_event = 7
-        elsif fields[8] == "N1"
+        elsif fields[8] == "N1" ||  fields[8] == '1'
           line_event = 1
-        elsif fields[8] == "N2"
+        elsif fields[8] == "N2" ||  fields[8] == '2'
           line_event = 2
-        elsif fields[8] == "N3"
+        elsif fields[8] == "N3" ||  fields[8] == '3'
           line_event = 3
-        elsif fields[8] == "4"
+        elsif fields[8] == "N4" || fields[8] == '4'
           line_event = 4
         elsif fields[8] == "REM"
           line_event = 5
@@ -275,17 +278,17 @@ class TasciMerger
 
         ### SLEEP STAGE, LABTIME
         simple_line_event = nil
-        if fields[8] == "Wake"
+        if fields[8] == "Wake" || fields[8] == 'Awake'
           simple_line_event = 5
         elsif fields[8] == "Undefined"
           simple_line_event = 0
-        elsif fields[8] == "N1"
+        elsif fields[8] == "N1" || fields[8] == '1'
           simple_line_event = 1
-        elsif fields[8] == "N2"
+        elsif fields[8] == "N2" || fields[8] == '2'
           simple_line_event = 2
-        elsif fields[8] == "N3"
+        elsif fields[8] == "N3" || fields[8] == '3'
           simple_line_event = 3
-        elsif fields[8] == "4"
+        elsif fields[8] == "N4" || fields[8] == '4'
           simple_line_event = 4
         elsif fields[8] == "REM"
           simple_line_event = 6
@@ -300,18 +303,17 @@ class TasciMerger
         elsif sleep_period == 2
           simple_line_event = 9
         end
-
-
-
-
-
+        
         first_labtime = line_labtime if first_labtime.nil?
         last_labtime = line_labtime
 
         output_line = [@subject_code.upcase, file_info[:sleep_wake_episode], line_labtime.to_decimal, line_event, sleep_period, sem_event]
         simple_output_line = [simple_line_event, line_labtime.to_decimal]
+        sem_output_line = [@subject_code.upcase, line_labtime.to_decimal] if sem_event == 1
+
         merged_file << output_line
         simple_merged_file << simple_output_line
+        sem_merged_file << sem_output_line if sem_event == 1
 
         #MY_LOG.info fields
       end
@@ -327,6 +329,7 @@ class TasciMerger
     end
     merged_file.close
     simple_merged_file.close
+    sem_merged_file.close
   end
 
 end
