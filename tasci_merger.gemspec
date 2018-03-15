@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.date        = '2018--3-15'
   s.summary     = "Merger utility for TASCI scored sleep files."
   s.description = "Merger utility for TASCI scored sleep files, built for the Division of Sleep and Circadian Disorders at BWH."
-  s.authors     = ["Piotr Mankowski"]
-  s.email       = 'pmankowski@partners.org'
+  s.authors     = ["Piotr Mankowski", "Chenxi Gao"]
+  s.email       = ['pmankowski@partners.org', 'cg342@bwh.harvard.edu']
   s.files       = %w(LICENSE README.md tasci_merger.gemspec lib/tasci_merger.rb lib/man_merger.rb lib/labtime.rb)
   s.require_path = 'lib'
   s.homepage    =
