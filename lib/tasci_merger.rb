@@ -137,7 +137,7 @@ class TasciMerger
     sem_merged_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_sem_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
     simple_merged_file << %w(SUBJECT_CODE LABTIME)
 
-    simple_sem_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_simple_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
+    simple_sem_file = CSV.open(File.join(@output_directory, "#{@subject_code}_merged_simple_sem_#{Time.zone.now.strftime("%Y%m%d")}.csv"), "wb")
     simple_sem_file << %w(SLEEP_STAGE LABTIME SEM_FLAG)
 
     previous_first_labtime = nil
